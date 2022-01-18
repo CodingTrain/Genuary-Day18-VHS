@@ -3,8 +3,11 @@ PImage vhs;
 
 float len = 1000;
 float a = 0;
-float sr = 50;
-float r = r;
+float sr = 32;
+float r = sr+1;
+
+float maxR = 138;
+float minR = sr;
 
 void setup() {
   size(600, 600);
@@ -14,19 +17,61 @@ void setup() {
 void draw() {
   background(255);
   imageMode(CENTER);
-  // image(vhs, width * 0.5, height * 0.5);
 
+  // Right side
+  stroke(0);
+  noFill();
+  pushMatrix();
+  translate(432, 304);
+  pushMatrix();
+  rotate(a);
+  for (float la = 0; la < TWO_PI; la += PI/6) {
+    rotate(PI/6);
+    strokeWeight(4);
+    stroke(0, 100);
+    line(0, 0, sr, 0);
+  }
+  popMatrix();
+  noFill();
+  randomSeed(4);
+  for (float d = sr*2; d < r*2; d+=2) {
+    stroke(random(50));
+    strokeWeight(2);
+    circle(0, 0, d);
+  }
+  popMatrix();
+
+
+
+  // LEFT SIDE
   stroke(0);
   noFill();
   strokeWeight(4);
-  translate(400, 300);
+  pushMatrix();
+  translate(172, 304);
+  pushMatrix();
   rotate(a);
-  line(0, 0, r, 0);
-  for (float d = r*2; d < sr*2; d++) {
+  for (float la = 0; la < TWO_PI; la += PI/6) {
+    rotate(PI/6);
+    strokeWeight(4);
+    stroke(0, 100);
+    line(0, 0, sr, 0);
+  }
+  popMatrix();
+  noFill();
+  randomSeed(4);
+  float leftR = map(r, minR, maxR, maxR, minR);
+  for (float d = sr*2; d < leftR*2; d+=2) {
+    stroke(random(100));
+    strokeWeight(2);
     circle(0, 0, d);
   }
-  a-=0.1;
-  if (a >= TWO_PI) {
-    a = TWO_PI;
-  }
+  popMatrix();
+
+  image(vhs, width * 0.5, height * 0.5);
+
+  a+=0.1;
+  r+=3/r;
+  //r = map(mouseX, 0, width, minR, maxR);
+  r = constrain(r, minR, maxR);
 }
