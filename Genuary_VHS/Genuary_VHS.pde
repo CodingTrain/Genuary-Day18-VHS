@@ -25,12 +25,12 @@ void draw() {
   translate(432, 304);
   pushMatrix();
   rotate(a/r);
-  //for (float la = 0; la < TWO_PI; la += PI/6) {
-    //rotate(PI/6);
-    //strokeWeight(4);
-    //stroke(0, 100);
+  for (float la = 0; la < TWO_PI; la += PI/6) {
+    rotate(PI/6);
+    strokeWeight(4);
+    stroke(0, 100);
     line(0, 0, sr, 0);
-  //}
+  }
   popMatrix();
   noFill();
   randomSeed(4);
